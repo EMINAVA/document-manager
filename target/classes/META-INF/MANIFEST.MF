@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Built-By: java
+Build-Jdk: 17.0.3
+Main-Class: it.eforhum.corsojava.varop.MainEmpty
+Created-By: Maven Integration for Eclipse
+
