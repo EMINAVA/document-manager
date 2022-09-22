@@ -5,13 +5,18 @@ import com.thedeanda.lorem.LoremIpsum;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.CharacterPredicates;
 import org.apache.commons.text.RandomStringGenerator;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DocumentManager {
+	
     private final DocumentRepository repository = new DocumentRepository();
+    
     private final RandomStringGenerator randomStringGenerator = new RandomStringGenerator.Builder()
             .withinRange('0', 'z')
             .filteredBy(CharacterPredicates.LETTERS, CharacterPredicates.DIGITS)
             .build();
+    
     private int lastDocument = 1;
 
     //  2) caricamento attraverso generazione causale di informazioni
@@ -45,11 +50,24 @@ public class DocumentManager {
         return repository.getById(id);
     }
 //  5) modifica documento presente (cod e descrizione)
-	public Document updateDocument(String id, String cod, String desc) {
-
+	public Document updateDocument(String id, String cod, String desc) {	
+		var doc = repository.update(id, cod, desc);
+		repository.add(doc);
+		return doc;
     }
+	
 //  6) rimozione di un documento presente
+	public void removeDocument(String id) {
+		repository.delete(id);
+	}
+
 //  7) stampa di tutti i documenti che contengono nella descrizione una query di ricerca
+
+	public List<Document> printByDescription (String query) {      
+		List<Document> results = repository.searchByDescription(query);
+		return results;
+	}
+
 
     public String truncate(String str) {
         if (str.length() <= 30) {
@@ -62,35 +80,3 @@ public class DocumentManager {
 
 }
 
-/*
- * scrivere un programma che sia in grado di gestire un archivio di documenti
- * ogni documento è composto da
- *
- * ID - identificativo numerico che rappresenta in modo univoco il documento, max 6 digit
- * dato generale dal programma e non inserito dall'utente
- *
- * COD - codice alfanumerico di 6 caratteri - es. 0000B1 - il codice deve essere completato con degli 0 a sinistra quando necessario
- * dato inserito dall'utente
- *
- * DESC - descrizione del documento di 30 caratteri
- * dato inserito dall'utente, se si inseriscono più di 30 caratteri la descrizione sarà terminata con "..."
- *
- * funzionalità a disposizioni dell'utente
- *
- * 1) inserimento manuale dei dati
- * 2) caricamento attraverso generazione causale di informazioni
- * 3) ricerca e stampa di un documento attraverso l'identificativo
- * 4) stampa paginata della lista documenti così rappresentata
- * 5) modifica documento presente (cod e descrizione)
- * 6) rimozione di un documento presente
- * 7) stampa di tutti i documenti che contengono nella descrizione una query di ricerca
- *
- * pagina 1:
- * da record 1 a record 5
- * ------|------|-------------------
- * ID    |COD   |DESC
- * ------|------|-------------------
- *      1|0000B1|descrizione prova
- *      2|05FG8R|altra descrizione di prova
- *      3|XXXXXX|altra descrizione troppo lu
- */

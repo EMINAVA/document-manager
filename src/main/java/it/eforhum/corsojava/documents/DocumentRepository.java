@@ -19,15 +19,32 @@ public class DocumentRepository {
         return null;
     }
 
-    public Document searchByDescription(String query) {
-//        query = query.trim().toLowerCase().replaceAll(" {2}", "");
+/*      public Document searchByDescription(String query) {
+        query = query.trim().toLowerCase().replaceAll(" {2}", "");
         for (Document document : documents) {
             if (document.getDescription().toLowerCase().contains(query)) {
                 return document;
             }
         }
         return null;
+    } 
+  */
+    
+    public List<Document> searchByDescription(String query) {
+        List<Document> results = new ArrayList<>();
+        for (Document document : documents) {
+            if (document.getDescription().toLowerCase().contains(query)) {
+                results.add(document);
+                
+            }
+        }
+        return results;
+        
+    	
     }
+    
+    
+    
 
     public void paginatedView(DocumentPage page) {
         int firstRes = (page.getPageNumber() - 1) * DocumentPage.RESULTS_PER_PAGE;
