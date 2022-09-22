@@ -2,8 +2,8 @@ package it.eforhum.corsojava.documents;
 
 public class Document {
 	private final String id;
-	private final String code;
-	private final String description;
+	private String code;
+	private String description;
 
 	private Document(String id, String code, String description) {
 		this.code = code;
@@ -21,6 +21,14 @@ public class Document {
 
 	public String getDescription() {
 		return description;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public static class Builder {		// 	Build pattern
@@ -57,5 +65,14 @@ public class Document {
 
 	public static Document createDocument(String id, String code, String description) {
 		return new Document(id, code, description);
+	}
+
+	@Override
+	public String toString() {
+		return "Document{" +
+				"id='" + id + '\'' +
+				", code='" + code + '\'' +
+				", description='" + description + '\'' +
+				'}';
 	}
 }

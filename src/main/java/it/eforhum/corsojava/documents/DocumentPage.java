@@ -3,60 +3,62 @@ package it.eforhum.corsojava.documents;
 import java.util.List;
 
 public class DocumentPage {
-    private final List<Document> documents;
-	private final int totalPages;
-	private final int totalResults;
+    public static final int  RESULTS_PER_PAGE = 5;
+    private List<Document> documents;
+    private int pageNumber;
+	private int totalPages;
+	private int totalResults;
 
-	private DocumentPage(List<Document> documents, int totalPages, int totalResults) {
-		this.documents = documents;
-		this.totalPages = totalPages;
-		this.totalResults = totalResults;
+	public DocumentPage(int pageNumber) {
+        if (pageNumber < 1) {
+            throw new IllegalArgumentException("Non è possibile prendere una pagina negativa");
+        }
+        this.pageNumber = pageNumber;
 	}
 
-	public List<Document> getDocuments() {
+    public List<Document> getDocuments() {
         return documents;
     }
 
-    public int getTotalResults() {
-        return totalResults;
+    public void setDocuments(List<Document> documents) {
+        this.documents = documents;
+    }
+
+    public int getPageNumber() {
+        return pageNumber;
+    }
+
+    public void setPageNumber(int pageNumber) {
+        this.pageNumber = pageNumber;
     }
 
     public int getTotalPages() {
         return totalPages;
     }
 
-
-    public static class Builder {
-        private List<Document> documents;
-		private int totalPages;
-		private int totalResults;
-
-        public Builder() {
-            this.totalResults = 0;
-            this.totalPages = 0;
-        }
-
-        public DocumentPage buildDocPage() {
-            return new DocumentPage(documents, totalPages, totalResults);
-        }
-
-        public Builder setDocuments(List<Document> documents) {
-            this.documents = documents;
-            return this;
-        }
-
-        public Builder setTotalResults(int totalResults) {
-            this.totalResults = totalResults;
-            return this;
-        }
-
-        public Builder setTotalPages(int totalPages) {
-            this.totalPages = totalPages;
-            return this;
-        }
+    public void setTotalPages(int totalPages) {
+        this.totalPages = totalPages;
     }
 
-	public static DocumentPage createDocumentPage(List<Document> documents, int totalPages, int totalResults) {
-		return new DocumentPage(documents, totalPages, totalResults);
-	}
+    public int getTotalResults() {
+        return totalResults;
+    }
+
+    public void setTotalResults(int totalResults) {
+        this.totalResults = totalResults;
+    }
+
+    @Override
+    public String toString() {
+        if (documents.size() == 0) {
+            return "[]";
+        }
+        var sb = new StringBuilder("[");
+        for (Document document : documents) {
+            sb.append(document).append(", \n");
+        }
+        sb.delete(sb.length() - 2, sb.length());
+        sb.append("]");
+        return sb.toString();
+    }
 }
