@@ -1,7 +1,7 @@
 package it.eforhum.corsojava.documents;
 
 /*
- * scrivere un programma che sia in grado di gestire un archivio di documenti
+ * Scrivere un programma che sia in grado di gestire un archivio di documenti
  * ogni documento è composto da
  *
  * ID - identificativo numerico che rappresenta in modo univoco il documento, max 6 digit
@@ -13,7 +13,7 @@ package it.eforhum.corsojava.documents;
  * DESC - descrizione del documento di 30 caratteri
  * dato inserito dall'utente, se si inseriscono più di 30 caratteri la descrizione sarà terminata con "..."
  *
- * funzionalità a disposizioni dell'utente
+ * Funzionalità a disposizioni dell'utente
  *
  * 1) inserimento manuale dei dati
  * 2) caricamento attraverso generazione causale di informazioni
@@ -38,13 +38,10 @@ package it.eforhum.corsojava.documents;
 public class RunTest {
 	
 	public static void main(String[] args) {
-
 		var docManager = new DocumentManager();
-
 		
-		
-		docManager.userDocument("1", "000D44", "primo documento");
-		docManager.userDocument("2", "000D45", "secondo documento");
+		docManager.userDocument("000D44", "primo documento");
+		docManager.userDocument("000D45", "secondo documento");
 		
 		var page = docManager.printByDescription("primo");
 

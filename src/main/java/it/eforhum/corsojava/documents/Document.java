@@ -1,6 +1,9 @@
 package it.eforhum.corsojava.documents;
 
 public class Document {
+	public static final int ID_MAX_LENGTH = 6;
+	public static final int CODE_MAX_LENGTH = 6;
+
 	private final String id;
 	private String code;
 	private String description;
