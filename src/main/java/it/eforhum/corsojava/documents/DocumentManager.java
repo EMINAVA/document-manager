@@ -37,7 +37,7 @@ public class DocumentManager {
         String desc = truncate(lorem.getWords(10, 30));
 
         String id = nextId();
-        String cod = randomStringGenerator.generate(6).toUpperCase();
+        String cod = randomStringGenerator.generate(Document.CODE_MAX_LENGTH).toUpperCase();
 
         Document doc = Document.createDocument(id, cod, desc);
         repository.add(doc);
@@ -72,7 +72,7 @@ public class DocumentManager {
     }
 
     private String truncate(String str) {
-        if (str.length() <= 30) {
+        if (str.length() <= Document.DESCRIPTION_MAX_LENGTH) {
             return str;
         }
         String res = str.substring(0, 27);
@@ -86,16 +86,17 @@ public class DocumentManager {
      * dato inserito dall'utente
      */
     private String fixCode(String cod) {
-        if (cod.length() < 6) {
+        if (cod.length() < Document.CODE_MAX_LENGTH) {
             return StringUtils.leftPad(cod, Document.CODE_MAX_LENGTH, "0");
         }
-        if (cod.length() > 6) {
-            throw new IllegalArgumentException("Il codice del documento dev'essere lungo massimo 6 caratteri");
+        if (cod.length() > Document.CODE_MAX_LENGTH || !StringUtils.isAlphanumeric(cod)) {
+            throw new IllegalArgumentException(
+                    String.format("Il codice del documento dev'essere lungo massimo %d caratteri", Document.CODE_MAX_LENGTH));
         }
         return cod;
     }
 
     private String nextId() {
-        return StringUtils.leftPad(String.valueOf(lastDocument++), 6);
+        return StringUtils.leftPad(String.valueOf(lastDocument++), Document.ID_MAX_LENGTH);
     }
 }

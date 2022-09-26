@@ -34,6 +34,10 @@ public class DocumentRepository {
         int firstRes = (page.getPageNumber() - 1) * DocumentPage.RESULTS_PER_PAGE;
         int lastResult = firstRes + DocumentPage.RESULTS_PER_PAGE;
 
+        if (documents.size() > firstRes && documents.size() < lastResult) {
+            lastResult = documents.size();
+        }
+
         List<Document> res;
         try {
             res = documents.subList(firstRes, lastResult);

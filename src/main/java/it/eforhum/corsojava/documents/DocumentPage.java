@@ -1,10 +1,12 @@
 package it.eforhum.corsojava.documents;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DocumentPage {
     public static final int  RESULTS_PER_PAGE = 5;
-    private List<Document> documents;
+    private List<Document> documents = new ArrayList<>();
     private int pageNumber;
 	private int totalPages;
 	private int totalResults;
@@ -50,15 +52,6 @@ public class DocumentPage {
 
     @Override
     public String toString() {
-        if (documents.size() == 0) {
-            return "[]";
-        }
-        var sb = new StringBuilder("[");
-        for (Document document : documents) {
-            sb.append(document).append(", \n");
-        }
-        sb.delete(sb.length() - 2, sb.length());
-        sb.append("]");
-        return sb.toString();
+        return Arrays.toString(documents.toArray());
     }
 }

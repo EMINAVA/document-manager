@@ -38,6 +38,9 @@ package it.eforhum.corsojava.documents;
 public class RunTest {
 	
 	public static void main(String[] args) {
+		try (var userInterface = new UserInterface()) {
+			userInterface.run();
+		}
 		var docManager = new DocumentManager();
 		
 		docManager.userDocument("000D44", "primo documento");
