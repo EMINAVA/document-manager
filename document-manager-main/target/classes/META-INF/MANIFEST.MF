@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Built-By: docente
-Build-Jdk: 17.0.4.1
-Class-Path: lorem-2.1.jar commons-lang3-3.12.0.jar commons-text-1.9.jar 
- annotations-23.0.0.jar
-Main-Class: it.eforhum.corsojava.varop.MainEmpty
-Created-By: Maven Integration for Eclipse
-

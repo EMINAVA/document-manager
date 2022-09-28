@@ -34,19 +34,20 @@ package it.eforhum.corsojava.documents;
  */
 
 
+import java.util.List;
 
 public class RunTest {
 	
 	public static void main(String[] args) {
-		try (var userInterface = new UserInterface()) {
+		try (UserInterface userInterface = new UserInterface()) {
 			userInterface.run();
 		}
-		var docManager = new DocumentManager();
+        DocumentManager docManager = new DocumentManager();
 		
 		docManager.userDocument("000D44", "primo documento");
 		docManager.userDocument("000D45", "secondo documento");
-		
-		var page = docManager.printByDescription("primo");
+
+        List<Document> page = docManager.printByDescription("primo");
 
 		System.out.println(page);
 	}

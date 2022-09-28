@@ -35,17 +35,17 @@ public class Document {
 		this.description = description;
 	}
 
-	public static class Builder {		// 	Build pattern
+	public static class Builder { // Build pattern
 		private String code;
 		private String id;
 		private String description;
-		
+
 		public Builder() {
 			this.id = "";
 			this.code = "";
 			this.description = "";
 		}
-		
+
 		public Document buildDoc() {
 			return new Document(id, code, description);
 		}
@@ -73,10 +73,7 @@ public class Document {
 
 	@Override
 	public String toString() {
-		return "Document{" +
-				"id='" + id + '\'' +
-				", code='" + code + '\'' +
-				", description='" + description + '\'' +
-				'}';
+		return "Document{" + "id='" + id + '\'' + ", code='" + code + '\'' + ", description='" + description + '\''
+				+ '}';
 	}
 }

@@ -22,10 +22,13 @@ public class DocumentRepository {
     public List<Document> searchByDescription(String query) {
         List<Document> results = new ArrayList<>();
         for (Document document : documents) {
-            if (document.getDescription().toLowerCase().contains(query)) {
+          
+        	if (document.getDescription().toLowerCase().contains(query)) {
                 results.add(document);
             }
         }
+
+        
         return results;
     }
 
@@ -55,8 +58,8 @@ public class DocumentRepository {
         page.setTotalResults(documents.size());
     }
 
-    public Document update(String id, String code, String description) {
-        var doc = getById(id);
+	public Document update(String id, String code, String description) {
+        Document doc = getById(id);
         if (doc == null) {
             return null;
         }
@@ -70,8 +73,7 @@ public class DocumentRepository {
         if (document == null) {
             return false;
         }
-        documents.remove(document);
-        return true;
+        return documents.remove(document);
     }
 
     private static boolean compareIds(String id1, String id2) {
